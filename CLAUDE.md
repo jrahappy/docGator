@@ -107,3 +107,40 @@ The application architecture:
 - The app uses Material Design 3 with deepPurple color scheme
 - Images are processed and can be rotated, flipped, and cropped before upload
 - Secure storage is used for auth token persistence
+
+## API Configuration
+
+Update the following files to set your API endpoints:
+
+### 1. Authentication Service (`lib/services/auth_service.dart`)
+- Line 14: Base URL configuration
+  ```dart
+  _apiBaseUrl = apiBaseUrl ?? 'https://your-api-endpoint.com';
+  ```
+- Endpoint used: `/auth/login` for user authentication
+
+### 2. API Service (`lib/services/api_service.dart`)
+- Line 11: Base URL for image uploads
+  ```dart
+  _dio.options.baseUrl = 'https://your-api-endpoint.com';
+  ```
+- Endpoints used:
+  - `/upload` - Image upload endpoint (line 30)
+  - `/images` - Get uploaded images (line 55)
+
+### 3. Expense Service (`lib/services/expense_service.dart`)
+- Line 10: Base URL for expense operations
+  ```dart
+  _dio.options.baseUrl = 'https://your-api-endpoint.com';
+  ```
+- Endpoints used:
+  - `/expense-lists` - Get all expense lists (line 22)
+  - `/expense-lists/{listId}/items` - Get items for specific list (line 60)
+
+### Local Development Example
+For local development, you can use:
+```dart
+_apiBaseUrl = 'http://192.168.1.100:3000'; // Replace with your local server IP
+```
+
+**Note**: The app includes mock data fallbacks, so it functions without a real backend for testing purposes.
